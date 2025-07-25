@@ -1,0 +1,59 @@
+PAGE 6 – Dashboard
+
+
+Develop a Dashboard page showing:  
+- Assigned course (AIOps or MLOps).  
+- Interactive S-curve with 10 chapters; current chapter unlocked and others locked.  
+- Clicking unlocked chapter navigates to Learning Path page.  
+- Style all UI elements per 'theme.css'.  
+- Responsive and accessible design.
+________________________________________
+PAGE 7 – Learning Path Page
+
+
+Build a Learning Path page with:  
+- Fixed left sidebar with navigation links: Learning Path, Course Page, Assistant, Video Resources.  
+- Main content: horizontally scrollable list of chapter videos; unlock sequentially.  
+- Chapter progress info (quizzes and assessments) below video list.  
+- Use only classes/styles from 'theme.css' or custom CSS, no inline styles.  
+- Responsive layout.
+________________________________________
+PAGE 8 – Course Page
+
+
+Create a Course page including:  
+- Fixed left sidebar navigation (same as Learning Path).  
+- Video player with controls: play, pause, fullscreen, volume.  
+- Right panel with toggles: Assistant (chat interface) and IDE (embedded code editor).  
+- Only one toggle active at a time.  
+- Use 'theme.css' for styling; no inline styles.  
+- Responsive design.
+________________________________________
+PAGE 9 – Assistant Page
+
+
+Build Assistant page featuring:  
+- Fixed left sidebar navigation.  
+- Chat interface with toggles for: Knowledge Base (Pinecone), Direct LLM, Video Suggestions (YouTube on/off), IDE toggle, Video Source (YouTube/Pinecone).  
+- Input box for user queries and LLM + RAG powered responses.  
+- Apply consistent styling from 'theme.css'; no inline CSS.  
+- Responsive layout.
+________________________________________
+PAGE 10 – Code Playground
+
+
+Create Code Playground page with:  
+- Multi-language code editor integrated with Piston API to run and display code output.  
+- Run button and output console.  
+- Styled exclusively via 'theme.css'.  
+- Responsive and accessible design.
+________________________________________
+PAGE 11 – Video Resources
+
+
+Develop Video Resources page that:  
+- Uses YouTube Data API to fetch and display 6 videos based on user interest or search.  
+- Videos shown in scrollable or grid format with thumbnails and titles.  
+- Clicking a video plays it.  
+- Use 'theme.css' classes for all styling; no inline styles.  
+- Responsive layout.

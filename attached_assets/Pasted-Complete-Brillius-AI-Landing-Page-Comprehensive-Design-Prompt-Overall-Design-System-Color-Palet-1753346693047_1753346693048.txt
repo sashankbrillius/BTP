@@ -1,0 +1,160 @@
+Complete Brillius AI Landing Page - Comprehensive Design Prompt
+🎨 Overall Design System
+Color Palette:
+Primary Background: Dark slate gradient (from-slate-950 via-slate-900 to-slate-950)
+Brand Orange: #FF6B35 (primary CTA buttons, highlights)
+Brand Red: Red-500 to Red-600 (gradient combinations)
+Accent Colors: Purple-500, Blue-600, Cyan-500, Green-400, Violet-500, Pink-500
+Text: White primary, Gray-300 secondary, Gray-400 muted
+Borders: Slate-700/50 (semi-transparent borders)
+Typography:
+Headers: 4xl to 8xl responsive scaling, font-bold
+Body: xl to 2xl for descriptions, leading-relaxed
+Code: font-mono for technical elements
+📱 Header Component (EnhancedHeader)
+Design Elements:
+Logo: Brillius Technologies logo (16px height) with hover scale effect (1.05x)
+Background: Dynamic transparency - transparent on top, slate-900/95 with backdrop-blur when scrolled
+Border: Subtle slate-800/50 border appears on scroll with shadow-2xl
+Navigation:
+Desktop Menu:
+Home, Courses (dropdown), AI Assistant, Pricing, About
+Text color transitions: white → orange-400 on hover
+Animated underline: gradient orange-to-red expanding from 0 to full width
+Dropdown: Slate-800/95 background with backdrop-blur-xl
+User Profile (when logged in):
+Avatar with dropdown containing: Dashboard, Settings, Logout
+Smooth fade-in animations for dropdown items
+Mobile:
+Hamburger menu with slide-in sheet from right
+Same navigation structure adapted for mobile layout
+🚀 Hero Section (RichHero)
+Animated Background System:
+Large Central Orb: 600x600px orange-to-purple gradient, blur-3xl, float animation
+Corner Orbs:
+Top-left: 96x96px orange-to-red, pulse animation
+Bottom-right: 80x80px blue-to-purple, pulse with 1s delay
+Floating Accent Orbs:
+Top-right: 32x32px cyan-to-blue, float with 0.5s delay
+Bottom-left: 48x48px purple-to-pink, pulse with 2s delay
+Various other orbs: green, violet, yellow, rose (24px-64px sizes)
+Grid Pattern: White grid overlay at 2% opacity, 50px squares
+Floating Particles: 6 orange particles with staggered float animations
+Content Structure:
+Badge Element:
+Glass morphism design: orange gradient background (10% opacity)
+Border: orange-500/20
+Text: "AI-Powered Assessment Platform"
+Icons: Sparkles (left) + Zap (right)
+Color: orange-300 text
+Main Headline:
+"Master DevOps with" (white text, 5xl-8xl responsive)"AI-Powered Assessments" (animated gradient: orange-400 → red-500 → purple-600)"With native AI at every step." (smaller, gray-300)
+Subtitle:
+"Transform your hiring process with intelligent coding assessments that evaluate real-world skills in DevOps, AIOps, and MLOps"
+CTA Buttons:
+Primary "Sign Up":
+Background: gradient from orange-500 → orange-600 → red-600
+Hover: shifts to orange-600 → red-600 → red-700
+Effects: scale-105 on hover, shadow-2xl, shine overlay
+Icon: ArrowRight with translate-x-1 on hover
+Secondary "Watch Demo":
+Border: violet-500/50, background: violet-600
+Hover: violet-700 background
+Icon: Play symbol
+Backdrop blur effect
+Interactive Code Demo:
+Container: Glass morphism (slate-900/80 to slate-800/80)
+Header: Mac-style controls (red, yellow, green dots)
+Status: Green pulsing dot + "Live Assessment" text
+Code Content: Syntax-highlighted Python with:
+Comments: gray-500
+Keywords: purple-400 (def), blue-400
+Functions: yellow-400
+Variables: orange-400
+AI methods: green-400
+🏢 TrustedBy Section
+Partner logos in horizontal scroll
+Glass morphism cards with hover effects
+Gradient overlays for smooth scroll appearance
+💫 MovingCards Section
+Background Effects:
+Top-left: 96x96px orange-to-red orb with float animation
+Bottom-right: 96x96px blue-to-purple orb with float (2s delay)
+Additional accent orbs: green-emerald (32px), violet-indigo (44px)
+Feature Cards (6 total):
+AI-Powered Assessment
+Icon: Brain, Color: purple-500 to blue-600
+Metric: "97% Accuracy", Delay: 0s
+Multi-Language Support
+Icon: Code, Color: blue-500 to cyan-600
+Metric: "15+ Languages", Delay: 0.5s
+Real-time Evaluation
+Icon: Zap, Color: yellow-500 to orange-600
+Metric: "< 100ms Response", Delay: 1s
+Enterprise Security
+Icon: Shield, Color: green-500 to emerald-600
+Metric: "SOC 2 Certified", Delay: 1.5s
+Dynamic Question Pool
+Icon: Database, Color: indigo-500 to purple-600
+Metric: "10K+ Questions", Delay: 2s
+CI/CD Integration
+Icon: GitBranch, Color: pink-500 to red-600
+Metric: "20+ Integrations", Delay: 2.5s
+Card Design:
+Glass morphism background (slate-900/80 to slate-800/80)
+Backdrop blur-xl effect
+Border: slate-700/50 → orange-500/30 on hover
+Mouse-following parallax effect based on cursor position
+Staggered animation delays for organic appearance
+🛠️ PlatformShowcase Section
+Interactive demos of platform features
+Animated screenshots and mockups
+Step-by-step workflow visualization
+📊 PerformanceMetrics Section
+Animated counters showing platform statistics
+Charts and graphs with smooth animations
+Real-time updating metrics display
+🎯 EnhancedFeatures Section
+Header:
+"Ingest any technology," (white to gray-300 gradient)"get structured assessments" (orange-400 → red-500 → purple-600 animated gradient)
+Technology Integration Cards (Horizontal Scroll):
+First Row (Right Scroll): Docker🐳, Kubernetes☸️, AWS🟠, Jenkins🔨, Python🐍
+Second Row (Left Scroll): Node.js💚, React⚛️, PostgreSQL🐘, Redis🔴, Terraform🏗️
+Card Design:
+48px width, glass morphism background
+4xl emoji icons with scale-110 hover effect
+Category labels: Container, Orchestration, Cloud, CI/CD, Language, etc.
+Smooth infinite scroll animation
+Background Orbs:
+Top-quarter: purple-to-pink gradient (96x96px), pulse animation
+Bottom-quarter: blue-to-cyan gradient (96x96px), pulse with 1.5s delay
+Decorative accents: yellow-amber (24px), violet-indigo (44px), rose-pink (20px), emerald-teal (36px)
+💬 CustomerSuccess Section
+Testimonial cards with user avatars
+Company logos and success metrics
+Animated testimonial carousel
+💰 PricingCompare Section
+Three-tier pricing comparison
+Feature matrix with checkmarks
+Highlighted "Popular" tier with special styling
+🔗 RichFooter Section
+Multi-column layout with company info
+Social media icons and links
+Newsletter signup form
+Legal links and copyright
+🎬 Animation System
+CSS Animations:
+@keyframes float {  0%, 100% { transform: translateY(0px); }  50% { transform: translateY(-20px); }}@keyframes pulse {  0%, 100% { opacity: 1; }  50% { opacity: 0.5; }}@keyframes gradient {  0%, 100% { background-position: 0% 50%; }  50% { background-position: 100% 50%; }}@keyframes scroll-right {  0% { transform: translateX(0); }  100% { transform: translateX(-100%); }}
+Timing System:
+Float animations: 3-6 second durations
+Pulse effects: 2-4 second cycles
+Hover transitions: 200-500ms
+Scroll animations: 20-40 second loops
+Staggered delays: 0.5s increments (0s, 0.5s, 1s, 1.5s, 2s, 2.5s, 3s)
+Interactive Effects:
+Hover scale: 1.05x for buttons, 1.1x for icons
+Color transitions: 200-300ms duration
+Shadow animations: from shadow-2xl to shadow-orange-500/25
+Border animations: expanding underlines and color shifts
+Backdrop blur: dynamic blur levels based on scroll position
+This comprehensive landing page represents a cutting-edge design with over 50 animated elements, 12 major sections, and a sophisticated color system optimized for the AI-powered learning platform targeting DevOps professionals.

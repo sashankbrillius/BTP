@@ -1,0 +1,47 @@
+> rest-express@1.0.0 dev
+Assessment data already existsver/index.ts
+Course data already exists
+9:56:18 AM [express] serving on port 5000
+Browserslist: browsers data (caniuse-lite) is 9 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+9:56:22 AM [express] GET /api/user 401 in 2ms :: {"message":"Not authenticated"}
+9:56:23 AM [express] GET /api/user 401 in 1ms :: {"message":"Not authenticated"}
+9:56:26 AM [express] GET /api/user 401 in 1ms :: {"message":"Not authenticated"}
+9:56:27 AM [express] GET /api/user 401 in 1ms :: {"message":"Not authenticated"}
+9:57:19 AM [express] GET /api/assessment/questions 401 in 0ms :: {"message":"Not authenticated"}
+9:57:20 AM [express] GET /api/user 401 in 1ms :: {"message":"Not authenticated"}
+9:57:20 AM [express] GET /api/user 401 in 1ms :: {"message":"Not authenticated"}
+9:57:29 AM [express] POST /api/login 200 in 1708ms :: {"user":{"id":4,"username":"mlops","fullName":…
+Fetching questions for interest: MLOps, role: DevOps, experience: beginner
+Found 10 interest MCQ + 10 role MCQ + 1 coding questions
+Final question mix: 10 MLOps + 10 DevOps = 20 total
+9:57:30 AM [express] GET /api/assessment/questions 304 in 911ms :: {"mcqQuestions":[{"id":"d18c37ce-…
+Code evaluation: 0/3 tests passed, score: 0%
+Test case results: [
+  {
+    testCase: 1,
+    input: 'calculateAccuracy(85, 100)',
+    expected: '85.00',
+    actual: '',
+    passed: false
+  },
+  {
+    testCase: 2,
+    input: 'calculateAccuracy(7, 10)',
+    expected: '70.00',
+    actual: '',
+    passed: false
+  },
+  {
+    testCase: 3,
+    input: 'calculateAccuracy(123, 150)',
+    expected: '82.00',
+    actual: '',
+    passed: false
+  }
+]
+Submit assessment error: ReferenceError: testCaseResults is not defined
+    at <anonymous> (/home/runner/workspace/server/routes.ts:530:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+9:58:25 AM [express] POST /api/assessment/submit 500 in 1224ms :: {"message":"Failed to submit asses…

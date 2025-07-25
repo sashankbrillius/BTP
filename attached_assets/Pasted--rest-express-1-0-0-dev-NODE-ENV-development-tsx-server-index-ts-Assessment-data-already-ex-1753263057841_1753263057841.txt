@@ -1,0 +1,42 @@
+
+> rest-express@1.0.0 dev
+> NODE_ENV=development tsx server/index.ts
+
+Assessment data already exists
+Course data already exists
+9:28:55 AM [express] serving on port 5000
+Browserslist: browsers data (caniuse-lite) is 9 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+9:28:59 AM [express] GET /api/user 401 in 2ms :: {"message":"Not authenticated"}
+9:29:01 AM [express] GET /api/user 401 in 0ms :: {"message":"Not authenticated"}
+9:29:02 AM [express] GET /api/user 401 in 1ms :: {"message":"Not authenticated"}
+9:29:04 AM [express] GET /api/user 401 in 0ms :: {"message":"Not authenticated"}
+9:29:05 AM [express] GET /api/user 401 in 1ms :: {"message":"Not authenticated"}
+9:29:27 AM [express] GET /api/user 401 in 1ms :: {"message":"Not authenticated"}
+9:29:33 AM [express] GET /api/user 401 in 1ms :: {"message":"Not authenticated"}
+9:29:34 AM [express] POST /api/login 400 in 1586ms :: {"message":"User not found"}
+9:29:49 AM [express] POST /api/signup 200 in 2047ms :: {"user":{"id":3,"username":"bobby","fullName"…
+9:29:52 AM [express] POST /api/signup 200 in 721ms :: {"user":{"id":4,"username":"mlops","fullName":…
+9:30:08 AM [express] POST /api/user/update-details 200 in 235ms :: {"message":"Profile updated succe…
+Fetching questions for interest: AIOps, role: DevOps, experience: beginner
+Found 10 interest MCQ + 10 role MCQ + 0 coding questions
+Final question mix: 10 AIOps + 10 DevOps = 20 total
+No coding questions found for AIOps/beginner, trying domain only
+Found 0 coding questions with domain-only filter
+Get questions error: TypeError: Cannot read properties of undefined (reading 'id')
+    at <anonymous> (/home/runner/workspace/server/routes.ts:338:28)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+9:30:11 AM [express] GET /api/assessment/questions 500 in 1123ms :: {"message":"Failed to load quest…
+9:30:15 AM [express] POST /api/user/update-details 200 in 227ms :: {"message":"Profile updated succe…
+Fetching questions for interest: MLOps, role: DevOps, experience: beginner
+Found 0 interest MCQ + 10 role MCQ + 0 coding questions
+Only found 0 MLOps questions, trying to fill to 10
+Filled MLOps questions: 0
+Final question mix: 0 MLOps + 10 DevOps = 10 total
+No coding questions found for MLOps/beginner, trying domain only
+Found 0 coding questions with domain-only filter
+Get questions error: TypeError: Cannot read properties of undefined (reading 'id')
+    at <anonymous> (/home/runner/workspace/server/routes.ts:338:28)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+9:30:17 AM [express] GET /api/assessment/questions 500 in 1330ms :: {"message":"Failed to load quest…

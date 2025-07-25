@@ -1,0 +1,194 @@
+Product Requirements Document (PRD)
+Project Name: Brillius AI Tutor Platform
+Prepared By: [Your Name]
+Date: [Today’s Date]
+________________________________________
+1. Overview
+Brillius AI Tutor is an interactive, personalized AI-powered learning platform tailored for IT professionals and developers interested in AIOps and MLOps. The platform provides assessments, personalized course generation, video-based learning, coding playground, and AI-powered assistant features to boost learning efficiency.
+________________________________________
+2. Objectives
+•	Streamline user onboarding via signup/login and OAuth.
+•	Assess users based on role, experience, and interest for tailored learning paths.
+•	Generate personalized courses with chapter-wise progress tracking.
+•	Facilitate interactive learning via videos, quizzes, coding playground, and AI assistant.
+•	Provide curated video resources to support learning.
+•	Monitor user progress and provide feedback for continuous improvement.
+________________________________________
+3. Target Users
+•	IT professionals and developers in DevOps roles targeting AIOps and MLOps expertise.
+•	Learners seeking guided, AI-driven educational experiences.
+•	Users who value hands-on coding practice and AI-assisted doubt resolution.
+________________________________________
+4. Features and Requirements
+PAGE 1 – Landing Page / Home Page
+•	Header:
+o	Brillius logo (clickable, links to home).
+o	Login and Signup buttons.
+•	Footer:
+o	Basic copyright info from Brillius website.
+•	Main Content:
+o	Welcome message introducing the AI tutor.
+o	Explanation of how the AI tutor works.
+o	List of main features (assessments, personalized courses, AI assistant, coding playground).
+________________________________________
+PAGE 2 – Signup Page
+•	Form fields:
+o	Full Name (text).
+o	Email address (validated format).
+o	Password (minimum length & strength validation).
+o	Confirm Password (must match).
+•	Terms and Conditions checkbox (mandatory).
+•	Signup button.
+•	Link to login page for existing users.
+•	Google and LinkedIn OAuth login buttons.
+________________________________________
+PAGE 2 – Login Page
+•	Fields:
+o	Email address.
+o	Password.
+•	Login button.
+•	Link to signup page for new users.
+•	Google and LinkedIn OAuth login buttons.
+________________________________________
+PAGE 3 – Basic Details (New User)
+•	Form fields:
+o	Current Role (dropdown or text input).
+o	Years of experience (dropdown or numeric input).
+o	Interest dropdown (AIOps, MLOps).
+o	Resume upload (allowed: PDF, DOCX).
+•	Button: "Take me to Assessment".
+________________________________________
+PAGE 4 – Assessment
+•	Two assessment types:
+MCQ Assessment
+o	20 questions from database filtered by user interest (AIOps/MLOps) and experience level:
+	Beginner: < 2 years
+	Intermediate: 2 to <5 years
+	Advanced: 5+ years
+o	Questions stored in mcq_questions table:
+sql
+Copy
+CREATE TABLE public.mcq_questions (
+  id UUID NOT NULL DEFAULT gen_random_uuid(),
+  question TEXT NOT NULL,
+  options JSONB NOT NULL,
+  correct_answer TEXT NOT NULL,
+  category TEXT NOT NULL,
+  domain TEXT NOT NULL,
+  experience_level TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT now(),
+  PRIMARY KEY (id)
+);
+Coding Assessment
+•	One coding question from code_questions table matching user interest and experience:
+sql
+Copy
+CREATE TABLE public.code_questions (
+  id UUID NOT NULL DEFAULT gen_random_uuid(),
+  title TEXT NOT NULL,
+  description TEXT NOT NULL,
+  language TEXT NOT NULL,
+  domain TEXT NOT NULL,
+  experience_level TEXT NOT NULL,
+  category TEXT NOT NULL,
+  starter_code TEXT,
+  test_cases JSONB NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT timezone('utc', now()),
+  PRIMARY KEY (id)
+);
+•	Integration with Piston API to run code and validate test cases.
+•	Submit button to complete assessment.
+________________________________________
+PAGE 5 – Results
+•	Display detailed results for MCQ and coding assessments.
+•	Show combined score out of 100%.
+•	Button: "Generate Course" to create personalized course path.
+•	Use OpenAI to analyze results and give user feedback on improvement areas.
+________________________________________
+PAGE 6 – Dashboard
+•	Display assigned course (AIOps or MLOps).
+•	Visual S-curve representing 10 chapters.
+•	Highlight current chapter as accessible, lock others until unlocked.
+•	Clicking a chapter redirects to the Learning Path page.
+________________________________________
+PAGE 7 – Learning Path
+•	Fixed left sidebar with navigation: Learning Path, Course Page, Assistant, Video Resources.
+•	Main content:
+o	Horizontally scrollable video list for the current chapter.
+o	Sequential access to videos (unlock next video after completion of current).
+o	Below videos, show chapter progress: quizzes and assessments.
+________________________________________
+PAGE 8 – Course Page
+•	Left sidebar same as Learning Path.
+•	Video player with standard controls (play, pause, fullscreen, volume).
+•	Right pane with toggles:
+o	Assistant (chat-based AI for doubt clearing).
+o	IDE (embedded code editor for practice).
+•	Only one toggle active at a time; user can switch between Assistant and IDE.
+________________________________________
+PAGE 9 – Assistant
+•	Left sidebar fixed.
+•	Chat interface with toggle options:
+o	Knowledge base (RAG with Pinecone).
+o	Direct LLM mode.
+o	Video suggestions toggle (YouTube).
+o	IDE toggle for LLM-based coding assistance.
+o	Video source toggle (YouTube or Pinecone).
+•	Input box for user query, responses generated via LLM + RAG.
+________________________________________
+PAGE 10 – Code Playground
+•	Multi-language code editor powered by Piston API.
+•	Features: editor, run button, output console.
+•	Users can practice coding freely and see real-time output.
+________________________________________
+PAGE 11 – Video Resources
+•	Uses YouTube API to fetch and show 6 videos based on user interest or search.
+•	Videos displayed in scrollable or grid format for easy browsing.
+________________________________________
+5. Technical Requirements
+•	Responsive UI (desktop and mobile).
+•	Secure authentication & OAuth integration (Google, LinkedIn).
+•	Password hashing and validation.
+•	Resume upload handling and optional virus scanning.
+•	Piston API integration for code execution and assessment.
+•	YouTube Data API for video resources.
+•	Backend DB for user data, assessments, courses, videos (using Supabase/PostgreSQL).
+•	Session and state management.
+•	OpenAI API for feedback and assistant.
+•	Pinecone for vector search/RAG.
+•	Logic for locking/unlocking chapters and videos.
+________________________________________
+6. User Flow
+1.	User visits Landing Page.
+2.	Signs up or logs in (form or OAuth).
+3.	New users provide Basic Details.
+4.	User completes Assessment (MCQ + Coding).
+5.	Results page displays scores and user generates course.
+6.	User accesses Dashboard to begin learning.
+7.	Learning Path enables video-based learning with progress tracking.
+8.	Course Page offers video playback and interactive assistant/IDE.
+9.	Assistant provides chat-based AI help and video suggestions.
+10.	Code Playground enables free coding practice.
+11.	Video Resources provides additional curated content.
+________________________________________
+7. Milestones & Timeline (Example)
+Milestone	Timeframe
+UI/UX Design	2 weeks
+Backend & API Setup	3 weeks
+Authentication (Signup/Login)	1 week
+Basic Details + Assessment	2 weeks
+Results + Course Generation	1 week
+Dashboard + Learning Path	3 weeks
+Course Page + Assistant	3 weeks
+Code Playground + Video Resources	2 weeks
+Testing & QA	2 weeks
+Deployment	1 week
+________________________________________
+8. Success Metrics
+•	Signup conversion rate.
+•	Assessment completion rate.
+•	Course start and completion rates.
+•	Video and chapter completion rates.
+•	Assistant and code playground usage frequency.
+•	User satisfaction and feedback scores.
+

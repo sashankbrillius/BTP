@@ -1,0 +1,122 @@
+MCQ Question Review
+Review your answers to multiple choice questions
+Question 1
+Incorrect
+Which command is used to check the current memory usage on a Linux system?
+
+Your Answer: 1.
+Correct Answer: C. free -m
+Question 2
+Incorrect
+In a shell script, what does $? represent?
+
+Your Answer: 1.
+Correct Answer: C. Exit status of the last command
+Question 3
+Incorrect
+Which Git command is used to combine changes from two branches?
+
+Your Answer: 1.
+Correct Answer: C. git merge
+Question 4
+Incorrect
+What is the primary purpose of GitOps in a CI/CD pipeline?
+
+Your Answer: 1.
+Correct Answer: C. Version-controlled infrastructure and deployments
+Question 5
+Incorrect
+In a Jenkins pipeline, which file is typically used to define build steps?
+
+Your Answer: 1.
+Correct Answer: B. Jenkinsfile
+Question 6
+Incorrect
+What could cause a CI pipeline to fail unexpectedly?
+
+Your Answer: 1.
+Correct Answer: C. A failed test or syntax error in the config
+Question 7
+Incorrect
+. Which instruction in a Dockerfile is used to specify the base image?
+
+Your Answer: 1.
+Correct Answer: C. FROM
+Question 8
+Incorrect
+What is the benefit of using a multi-stage Docker build?
+
+Your Answer: 2.
+Correct Answer: C. Better security and smaller image size
+Question 9
+Incorrect
+Which Kubernetes object manages the desired number of pod replicas?
+
+Your Answer: 2.
+Correct Answer: B. Deployment
+Question 10
+Incorrect
+What is the role of the Horizontal Pod Autoscaler (HPA)?
+
+Your Answer: 1.
+Correct Answer: C. Automatically scales pods based on CPU/memory
+Question 11
+Incorrect
+What is the primary purpose of MLOps?
+
+Your Answer: 0.
+Correct Answer: B. To streamline ML model deployment and monitoring
+Question 12
+Incorrect
+Which tool is commonly used for ML model versioning?
+
+Your Answer: 1.
+Correct Answer: B. DVC (Data Version Control)
+Question 13
+Incorrect
+What is model drift in MLOps?
+
+Your Answer: 1.
+Correct Answer: B. Performance degradation over time
+Question 14
+Incorrect
+Which containerization tool is popular for ML model deployment?
+
+Your Answer: 1.
+Correct Answer: C. Docker
+Question 15
+Incorrect
+What does CI/CD stand for in MLOps context?
+
+Your Answer: 0.
+Correct Answer: B. Continuous Integration/Continuous Deployment
+Question 16
+Incorrect
+What is data drift in machine learning?
+
+Your Answer: 1.
+Correct Answer: B. Changes in input data distribution over time
+Question 17
+Incorrect
+What is a model registry in MLOps?
+
+Your Answer: 1.
+Correct Answer: B. Central repository for ML models
+Question 18
+Incorrect
+What is batch inference?
+
+Your Answer: 1.
+Correct Answer: B. Processing multiple records together
+Question 19
+Incorrect
+What is real-time inference?
+
+Your Answer: 1.
+Correct Answer: A. Predictions made instantly when requested
+Question 20
+Incorrect
+How do you monitor model performance in production?
+
+Your Answer: 1.
+Correct Answer: B. Automated metrics tracking

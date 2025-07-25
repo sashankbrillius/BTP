@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap');
+
+/* Global Brand Styles */
+.btn-primary {
+  @apply bg-brand-orange hover:bg-brand-orange-light text-white font-poppins font-semibold py-3 px-6 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 shadow-lg hover:shadow-xl;
+}
+
+.btn-secondary {
+  @apply bg-transparent border-2 border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-white font-poppins font-semibold py-3 px-6 rounded-lg transition-all duration-300;
+}
+
+.text-heading {
+  @apply font-poppins font-bold text-brand-dark;
+}
+
+.text-body {
+  @apply font-open-sans text-brand-gray;
+}
+
+.container-max {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.feature-card {
+  @apply bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100;
+}
+
+.hero-gradient {
+  background: linear-gradient(135deg, #2D3748 0%, #4A5568 50%, #FF6B35 100%);
+}
+
+.stats-counter {
+  @apply text-4xl font-bold text-brand-orange font-poppins;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .btn-primary, .btn-secondary {
+    @apply py-2 px-4 text-sm;
+  }
+  
+  .text-heading {
+    @apply text-2xl sm:text-3xl;
+  }
+  
+  .container-max {
+    @apply px-4;
+  }
+}

@@ -1,0 +1,563 @@
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Video, Brain, Code, Settings, X, ChevronRight, ChevronDown } from "lucide-react";
+import { ChatInterface, type ChatMessage } from "@/components/chat-interface";
+import { InlineIDE } from "@/components/inline-ide";
+import { VideoSuggestionsPanel } from "@/components/video-suggestions-panel";
+import { cn } from "@/lib/utils";
+import { usePineconeVideos } from "@/hooks/use-youtube-search";
+
+// Generate AI response using RAG or direct LLM
+const generateAIResponse = async (userMessage: string, useRAG: boolean = true): Promise<ChatMessage> => {
+  try {
+    // Call the appropriate endpoint based on user preference
+    const endpoint = useRAG ? '/api/rag/generate' : '/api/llm/generate';
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        query: userMessage,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to generate AI response');
+    }
+
+    const data = await response.json();
+    
+    // Process the response to extract code exercises and video suggestions
+    const lowerResponse = data.response.toLowerCase();
+    let metadata: any = {};
+
+    // Extract video suggestions based on response content and user query
+    const lowerQuery = userMessage.toLowerCase();
+    const videoSuggestions = [];
+    
+    if (lowerResponse.includes('devops') || lowerQuery.includes('devops')) {
+      videoSuggestions.push('DevOps fundamentals', 'CI/CD pipeline tutorial', 'Docker and Kubernetes basics');
+    } else if (lowerResponse.includes('javascript') || lowerResponse.includes('array') || lowerQuery.includes('javascript')) {
+      videoSuggestions.push('JavaScript arrays tutorial', 'JavaScript array methods map filter reduce', 'JavaScript array manipulation examples');
+    } else if (lowerResponse.includes('python') || lowerResponse.includes('loop') || lowerQuery.includes('python')) {
+      videoSuggestions.push('Python loops tutorial', 'Python for beginners', 'Python iteration methods');
+    } else if (lowerResponse.includes('react') || lowerResponse.includes('component') || lowerQuery.includes('react')) {
+      videoSuggestions.push('React components tutorial', 'React hooks explained', 'React state management');
+    } else if (lowerResponse.includes('node') || lowerResponse.includes('express') || lowerQuery.includes('node')) {
+      videoSuggestions.push('Node.js tutorial', 'Express.js crash course', 'Building REST APIs');
+    } else if (lowerResponse.includes('docker') || lowerQuery.includes('docker')) {
+      videoSuggestions.push('Docker tutorial', 'Containerization basics', 'Docker compose guide');
+    } else if (lowerResponse.includes('kubernetes') || lowerQuery.includes('kubernetes')) {
+      videoSuggestions.push('Kubernetes basics', 'K8s deployment tutorial', 'Container orchestration');
+    } else if (lowerResponse.includes('aws') || lowerQuery.includes('aws')) {
+      videoSuggestions.push('AWS fundamentals', 'Cloud computing basics', 'AWS services overview');
+    } else {
+      // Always provide relevant programming video suggestions based on query
+      if (lowerQuery.includes('programming') || lowerQuery.includes('code')) {
+        videoSuggestions.push('Programming fundamentals', 'Code best practices', 'Software development tutorials');
+      } else {
+        // Use the user's query as video suggestions
+        videoSuggestions.push(`${userMessage} tutorial`, `learn ${userMessage}`, `${userMessage} explained`);
+      }
+    }
+
+    // Generate code exercise based on content
+    if (lowerResponse.includes('javascript') || lowerResponse.includes('array')) {
+      metadata.codeExercise = {
+        language: "javascript",
+        title: "Practice JavaScript Array Methods",
+        code: `// TODO: Complete the array manipulation functions
+
+function addFruit(fruits, newFruit) {
+  // Add newFruit to the end of the array
+  return fruits;
+}
+
+function removeDuplicates(arr) {
+  // Remove duplicate elements
+  return arr;
+}
+
+function findLargest(numbers) {
+  // Find the largest number in the array
+  return 0;
+}
+
+// Test your functions
+console.log(addFruit(['apple', 'banana'], 'orange'));
+console.log(removeDuplicates([1, 2, 2, 3, 3, 4]));
+console.log(findLargest([3, 7, 1, 9, 2]));`,
+        testCases: [
+          "addFruit(['apple', 'banana'], 'orange') → ['apple', 'banana', 'orange']",
+          "removeDuplicates([1, 2, 2, 3, 3, 4]) → [1, 2, 3, 4]",
+          "findLargest([3, 7, 1, 9, 2]) → 9"
+        ]
+      };
+    } else if (lowerResponse.includes('python') || lowerResponse.includes('loop')) {
+      metadata.codeExercise = {
+        language: "python",
+        title: "Python Loops and Iterations",
+        code: `# TODO: Complete the loop-based functions
+
+def print_numbers(n):
+    """Print numbers from 1 to n"""
+    pass
+
+def sum_even_numbers(numbers):
+    """Calculate sum of even numbers in the list"""
+    total = 0
+    # Your code here
+    return total
+
+def create_multiplication_table(n):
+    """Create multiplication table for number n"""
+    table = []
+    # Your code here
+    return table
+
+# Test your functions
+print_numbers(5)
+print(sum_even_numbers([1, 2, 3, 4, 5, 6]))
+print(create_multiplication_table(3))`,
+        testCases: [
+          "print_numbers(5) should print 1, 2, 3, 4, 5",
+          "sum_even_numbers([1, 2, 3, 4, 5, 6]) → 12",
+          "create_multiplication_table(3) → [3, 6, 9]"
+        ]
+      };
+    }
+
+    metadata.videoSuggestions = videoSuggestions;
+
+    return {
+      id: `ai-${Date.now()}`,
+      role: "assistant",
+      content: data.response,
+      metadata,
+      timestamp: new Date()
+    };
+
+  } catch (error) {
+    console.error('Error generating AI response:', error);
+    // Fallback response
+    return {
+      id: `ai-${Date.now()}`,
+      role: "assistant",
+      content: "I'm sorry, I'm having trouble processing your request right now. Please try again later.",
+      timestamp: new Date()
+    };
+  }
+};
+
+// Legacy function for backward compatibility - will be removed
+const generateAIResponseSync = (userMessage: string): ChatMessage => {
+  const lowerMessage = userMessage.toLowerCase();
+  
+  if (lowerMessage.includes("array") || lowerMessage.includes("javascript")) {
+    return {
+      id: `ai-${Date.now()}`,
+      role: "assistant",
+      content: `Great question! JavaScript arrays are fundamental data structures. Let me show you some common array methods with examples:
+
+\`\`\`javascript
+// Creating arrays
+const fruits = ['apple', 'banana', 'orange'];
+const numbers = [1, 2, 3, 4, 5];
+
+// Common array methods
+fruits.push('grape'); // Add to end
+fruits.pop(); // Remove from end
+fruits.unshift('mango'); // Add to beginning
+fruits.shift(); // Remove from beginning
+
+// Iterating arrays
+numbers.forEach(num => console.log(num));
+const doubled = numbers.map(num => num * 2);
+const evens = numbers.filter(num => num % 2 === 0);
+\`\`\`
+
+I've prepared a coding exercise for you to practice these concepts. Check the IDE panel on the right!`,
+      metadata: {
+        codeExercise: {
+          language: "javascript",
+          title: "Practice JavaScript Array Methods",
+          code: `// TODO: Complete the array manipulation functions
+
+function addFruit(fruits, newFruit) {
+  // Add newFruit to the end of the array
+  return fruits;
+}
+
+function removeDuplicates(arr) {
+  // Remove duplicate elements
+  return arr;
+}
+
+function findLargest(numbers) {
+  // Find the largest number in the array
+  return 0;
+}
+
+// Test your functions
+console.log(addFruit(['apple', 'banana'], 'orange'));
+console.log(removeDuplicates([1, 2, 2, 3, 3, 4]));
+console.log(findLargest([3, 7, 1, 9, 2]));`,
+          testCases: [
+            "addFruit(['apple', 'banana'], 'orange') → ['apple', 'banana', 'orange']",
+            "removeDuplicates([1, 2, 2, 3, 3, 4]) → [1, 2, 3, 4]",
+            "findLargest([3, 7, 1, 9, 2]) → 9"
+          ]
+        },
+        videoSuggestions: [
+          "JavaScript arrays tutorial",
+          "JavaScript array methods map filter reduce",
+          "JavaScript array manipulation examples"
+        ]
+      },
+      timestamp: new Date()
+    };
+  }
+  
+  if (lowerMessage.includes("python") || lowerMessage.includes("loop")) {
+    return {
+      id: `ai-${Date.now()}`,
+      role: "assistant",
+      content: `Python loops are essential for iteration! Let me show you the different types of loops and their use cases:
+
+\`\`\`python
+# For loops - iterate over sequences
+fruits = ['apple', 'banana', 'orange']
+for fruit in fruits:
+    print(f"I like {fruit}")
+
+# Range-based loops
+for i in range(5):
+    print(f"Number: {i}")
+
+# While loops - continue until condition is false
+count = 0
+while count < 3:
+    print(f"Count: {count}")
+    count += 1
+
+# List comprehensions - elegant way to create lists
+squares = [x**2 for x in range(10)]
+even_squares = [x**2 for x in range(10) if x % 2 == 0]
+\`\`\`
+
+Try implementing these concepts in the exercise I've prepared for you!`,
+      metadata: {
+        codeExercise: {
+          language: "python",
+          title: "Python Loops and Iterations",
+          code: `# TODO: Complete the loop-based functions
+
+def print_numbers(n):
+    """Print numbers from 1 to n"""
+    pass
+
+def sum_even_numbers(numbers):
+    """Calculate sum of even numbers in the list"""
+    total = 0
+    # Your code here
+    return total
+
+def create_multiplication_table(n):
+    """Create multiplication table for number n"""
+    table = []
+    # Your code here
+    return table
+
+# Test your functions
+print_numbers(5)
+print(sum_even_numbers([1, 2, 3, 4, 5, 6]))
+print(create_multiplication_table(3))`,
+          testCases: [
+            "print_numbers(5) → prints 1, 2, 3, 4, 5",
+            "sum_even_numbers([1, 2, 3, 4, 5, 6]) → 12",
+            "create_multiplication_table(3) → ['3x1=3', '3x2=6', '3x3=9']"
+          ]
+        },
+        videoSuggestions: [
+          "Python for loops tutorial",
+          "Python while loops explained",
+          "Python list comprehensions guide"
+        ]
+      },
+      timestamp: new Date()
+    };
+  }
+
+  // Default response
+  return {
+    id: `ai-${Date.now()}`,
+    role: "assistant", 
+    content: `I'd be happy to help you learn programming! I can assist with:
+
+• Programming concepts and syntax
+• Algorithm explanations
+• Code debugging and optimization
+• Best practices and design patterns
+• Coding exercises and challenges
+
+What specific topic would you like to explore? For example, you could ask about:
+- JavaScript arrays and objects
+- Python loops and functions  
+- Data structures and algorithms
+- Web development concepts
+- Or any other programming topic!`,
+    metadata: {
+      videoSuggestions: [
+        "programming fundamentals tutorial",
+        "coding best practices",
+        "beginner programming concepts"
+      ]
+    },
+    timestamp: new Date()
+  };
+};
+
+export default function AssistantPage() {
+  const [messages, setMessages] = useState<ChatMessage[]>([
+    {
+      id: "welcome",
+      role: "assistant",
+      content: "Hello! I'm your AI programming tutor. I can help you learn programming concepts, solve coding problems, and suggest relevant video tutorials. What would you like to learn today?",
+      timestamp: new Date()
+    }
+  ]);
+  
+  const [currentExercise, setCurrentExercise] = useState<any>(null);
+  const [videoSuggestions, setVideoSuggestions] = useState<string[]>([]);
+  const [isVideosPanelOpen, setIsVideosPanelOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [useRAG, setUseRAG] = useState(true);
+  const [showVideoSuggestions, setShowVideoSuggestions] = useState(true);
+  const [showIDE, setShowIDE] = useState(false);
+  const [isCodePanelExpanded, setIsCodePanelExpanded] = useState(false);
+  const [usePineconeVideosSource, setUsePineconeVideosSource] = useState(false);
+
+  const handleSendMessage = async (content: string) => {
+    // Add user message
+    const userMessage: ChatMessage = {
+      id: `user-${Date.now()}`,
+      role: "user",
+      content,
+      timestamp: new Date()
+    };
+    
+    setMessages(prev => [...prev, userMessage]);
+    setIsLoading(true);
+    
+    try {
+      // Generate AI response using RAG or direct LLM based on toggle
+      const aiResponse = await generateAIResponse(content, useRAG);
+      setMessages(prev => [...prev, aiResponse]);
+      
+      // Update current code exercise if one was provided
+      if (aiResponse.metadata?.codeExercise) {
+        setCurrentExercise(aiResponse.metadata.codeExercise);
+        setShowIDE(true); // Auto-show IDE when code exercise is provided
+      }
+
+      // Update video suggestions only if feature is enabled
+      if (showVideoSuggestions && aiResponse.metadata?.videoSuggestions) {
+        setVideoSuggestions(aiResponse.metadata.videoSuggestions);
+        setIsVideosPanelOpen(true);
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      // Add fallback error message
+      const errorMessage: ChatMessage = {
+        id: `error-${Date.now()}`,
+        role: "assistant",
+        content: "I'm sorry, I'm having trouble processing your request right now. Please try again later.",
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleCodeExercise = (exercise: any) => {
+    setCurrentExercise(exercise);
+  };
+
+  const handleVideoSuggestions = (suggestions: string[]) => {
+    setVideoSuggestions(suggestions);
+    setIsVideosPanelOpen(true);
+  };
+
+  return (
+    <div className="h-screen overflow-hidden bg-gray-50">
+      <div className="flex h-full">
+        {/* Main Chat Area */}
+        <div className={cn(
+          "flex flex-col transition-all duration-300",
+          showIDE && currentExercise && !isCodePanelExpanded ? "flex-1" : "w-full",
+          isVideosPanelOpen && showVideoSuggestions && !showIDE ? "w-2/3" : "",
+          isVideosPanelOpen && showVideoSuggestions && showIDE ? "w-1/2" : ""
+        )}>
+          {/* Enhanced Header with Controls */}
+          <div className="bg-white border-b border-gray-200 px-6 py-4 flex-shrink-0">
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900 flex items-center">
+                  <Brain className="h-6 w-6 mr-2 text-blue-600" />
+                  AI Assistant
+                </h2>
+                <p className="text-sm text-gray-500">Advanced programming tutor with knowledge base</p>
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setIsCodePanelExpanded(!isCodePanelExpanded)}
+                className={cn(showIDE && currentExercise ? "visible" : "invisible")}
+              >
+                <Code className="h-4 w-4 mr-2" />
+                {isCodePanelExpanded ? "Collapse" : "Expand"} Code
+              </Button>
+            </div>
+            
+            {/* Control Panel */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+              <Card className="p-3">
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="rag-toggle" className="text-sm font-medium flex items-center">
+                    <Brain className="h-4 w-4 mr-2 text-purple-600" />
+                    Knowledge Base
+                  </Label>
+                  <Switch
+                    id="rag-toggle"
+                    checked={useRAG}
+                    onCheckedChange={setUseRAG}
+                  />
+                </div>
+                <p className="text-xs text-gray-500 mt-1">
+                  {useRAG ? "Enhanced responses" : "Direct LLM"}
+                </p>
+              </Card>
+
+              <Card className="p-3">
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="video-toggle" className="text-sm font-medium flex items-center">
+                    <Video className="h-4 w-4 mr-2 text-red-600" />
+                    Videos
+                  </Label>
+                  <Switch
+                    id="video-toggle"
+                    checked={showVideoSuggestions}
+                    onCheckedChange={(checked) => {
+                      setShowVideoSuggestions(checked);
+                      if (!checked) setIsVideosPanelOpen(false);
+                    }}
+                  />
+                </div>
+                <p className="text-xs text-gray-500 mt-1">
+                  {showVideoSuggestions ? "Auto-suggest" : "Disabled"}
+                </p>
+              </Card>
+
+              <Card className="p-3">
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="ide-toggle" className="text-sm font-medium flex items-center">
+                    <Code className="h-4 w-4 mr-2 text-green-600" />
+                    IDE
+                  </Label>
+                  <Switch
+                    id="ide-toggle"
+                    checked={showIDE}
+                    onCheckedChange={setShowIDE}
+                  />
+                </div>
+                <p className="text-xs text-gray-500 mt-1">
+                  {showIDE ? "Code editor visible" : "Hidden"}
+                </p>
+              </Card>
+
+              <Card className="p-3">
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="video-source-toggle" className="text-sm font-medium flex items-center">
+                    <Video className="h-4 w-4 mr-2 text-red-600" />
+                    Video Source
+                  </Label>
+                  <Switch
+                    id="video-source-toggle"
+                    checked={usePineconeVideosSource}
+                    onCheckedChange={setUsePineconeVideosSource}
+                  />
+                </div>
+                <p className="text-xs text-gray-500 mt-1">
+                  {usePineconeVideosSource ? "Pinecone" : "YouTube"}
+                </p>
+              </Card>
+
+              {/* <Card className="p-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center text-sm font-medium">
+                    <Settings className="h-4 w-4 mr-2 text-gray-600" />
+                    Status
+                  </div>
+                  <div className={cn(
+                    "w-2 h-2 rounded-full",
+                    isLoading ? "bg-blue-500 animate-pulse" : useRAG ? "bg-green-500" : "bg-yellow-500"
+                  )} />
+                </div>
+                <p className="text-xs text-gray-500 mt-1">
+                  {isLoading ? "Processing..." : "Ready"}
+                </p>
+              </Card> */}
+            </div>
+          </div>
+
+          {/* Chat Interface */}
+          <ChatInterface
+            messages={messages}
+            onSendMessage={handleSendMessage}
+            onCodeExercise={handleCodeExercise}
+            onVideoSuggestions={handleVideoSuggestions}
+            isLoading={isLoading}
+            className="flex-1 min-h-0"
+          />
+        </div>
+
+        {/* Code Panel - Side by side or expanded */}
+        {showIDE && (
+          <div className={cn(
+            "bg-white border-l border-gray-200 transition-all duration-300",
+            isCodePanelExpanded ? "fixed inset-0 z-50" : "w-96 min-w-96"
+          )}>
+            {isCodePanelExpanded && (
+              <div className="absolute top-4 right-4 z-10">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setIsCodePanelExpanded(false)}
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+            )}
+            <InlineIDE exercise={currentExercise} />
+          </div>
+        )}
+
+        {/* Video Suggestions Panel */}
+        {showVideoSuggestions && (
+          <VideoSuggestionsPanel
+            isOpen={isVideosPanelOpen}
+            onClose={() => setIsVideosPanelOpen(false)}
+            suggestions={videoSuggestions}
+            usePinecone={usePineconeVideosSource}
+          />
+        )}
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,104 @@
+
+> rest-express@1.0.0 dev
+Assessment data already existsver/index.ts
+Seeding video data...
+Video data already exists, preserving user progress
+Course data already exists
+Setting up knowledge base for first time
+Successfully stored 12 documents in Pinecone
+Knowledge base initialized successfully
+✅ Pinecone knowledge base initialized successfully
+10:53:19 AM [express] serving on port 5000
+Browserslist: browsers data (caniuse-lite) is 9 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+10:53:23 AM [express] GET /api/user 401 in 2ms :: {"message":"Not authenticated"}
+10:53:25 AM [express] GET /api/user 401 in 0ms :: {"message":"Not authenticated"}
+10:53:29 AM [express] GET /api/user 401 in 1ms :: {"message":"Not authenticated"}
+10:53:29 AM [express] GET /api/user 401 in 0ms :: {"message":"Not authenticated"}
+10:53:54 AM [express] GET /api/user 401 in 1ms :: {"message":"Not authenticated"}
+10:54:00 AM [express] GET /api/user 401 in 1ms :: {"message":"Not authenticated"}
+10:54:00 AM [express] POST /api/login 200 in 1630ms :: {"user":{"id":31,"username":"mlops12","fullNam…
+10:54:00 AM [express] GET /api/user 304 in 220ms :: {"id":31,"username":"mlops12","fullName":"MLOPS12…
+10:54:01 AM [express] GET /api/dashboard 304 in 440ms :: {"user":{"id":31,"username":"mlops12","fullN…
+User 31 progress for domain MLOps: 0 records
+Chapter 1: 0/4 completed
+Chapter 2: 0/4 completed
+Chapter 2 unlock check: { prevChapter: 1, prevCompleted: 0, prevTotal: 4, isUnlocked: false }
+Chapter 3: 0/4 completed
+Chapter 3 unlock check: { prevChapter: 2, prevCompleted: 0, prevTotal: 4, isUnlocked: false }
+Chapter 4: 0/4 completed
+Chapter 4 unlock check: { prevChapter: 3, prevCompleted: 0, prevTotal: 4, isUnlocked: false }
+Chapter 5: 0/4 completed
+Chapter 5 unlock check: { prevChapter: 4, prevCompleted: 0, prevTotal: 4, isUnlocked: false }
+Chapter 6: 0/4 completed
+Chapter 6 unlock check: { prevChapter: 5, prevCompleted: 0, prevTotal: 4, isUnlocked: false }
+Chapter 7: 0/4 completed
+Chapter 7 unlock check: { prevChapter: 6, prevCompleted: 0, prevTotal: 4, isUnlocked: false }
+Chapter 8: 0/4 completed
+Chapter 8 unlock check: { prevChapter: 7, prevCompleted: 0, prevTotal: 4, isUnlocked: false }
+Chapter 9: 0/4 completed
+Chapter 9 unlock check: { prevChapter: 8, prevCompleted: 0, prevTotal: 4, isUnlocked: false }
+Chapter 10: 0/4 completed
+Chapter 10 unlock check: { prevChapter: 9, prevCompleted: 0, prevTotal: 4, isUnlocked: false }
+10:54:02 AM [express] GET /api/learning/MLOps/chapters 304 in 445ms :: [{"id":1,"domain":"MLOps","cha…
+10:54:04 AM [express] POST /api/login 200 in 277ms :: {"user":{"id":3,"username":"bobby","fullName":"…
+10:54:05 AM [express] GET /api/user 304 in 220ms :: {"id":3,"username":"bobby","fullName":"chintu","e…
+10:54:06 AM [express] GET /api/dashboard 304 in 663ms :: {"user":{"id":3,"username":"bobby","fullName…
+User 3 progress for domain AIOps: 1 records
+Chapter 1: 1/7 completed
+Chapter 2: 0/7 completed
+Chapter 2 unlock check: { prevChapter: 1, prevCompleted: 1, prevTotal: 7, isUnlocked: false }
+Chapter 3: 0/7 completed
+Chapter 3 unlock check: { prevChapter: 2, prevCompleted: 0, prevTotal: 7, isUnlocked: false }
+Chapter 4: 0/7 completed
+Chapter 4 unlock check: { prevChapter: 3, prevCompleted: 0, prevTotal: 7, isUnlocked: false }
+Chapter 5: 0/7 completed
+Chapter 5 unlock check: { prevChapter: 4, prevCompleted: 0, prevTotal: 7, isUnlocked: false }
+Chapter 6: 0/7 completed
+Chapter 6 unlock check: { prevChapter: 5, prevCompleted: 0, prevTotal: 7, isUnlocked: false }
+Chapter 7: 0/7 completed
+Chapter 7 unlock check: { prevChapter: 6, prevCompleted: 0, prevTotal: 7, isUnlocked: false }
+Chapter 8: 0/7 completed
+Chapter 8 unlock check: { prevChapter: 7, prevCompleted: 0, prevTotal: 7, isUnlocked: false }
+Chapter 9: 0/7 completed
+Chapter 9 unlock check: { prevChapter: 8, prevCompleted: 0, prevTotal: 7, isUnlocked: false }
+Chapter 10: 0/8 completed
+Chapter 10 unlock check: { prevChapter: 9, prevCompleted: 0, prevTotal: 7, isUnlocked: false }
+10:54:07 AM [express] GET /api/learning/AIOps/chapters 304 in 441ms :: [{"id":11,"domain":"AIOps","ch…
+User 3 progress for domain AIOps: 1 records
+Chapter 1: 1/7 completed
+Chapter 2: 0/7 completed
+Chapter 2 unlock check: { prevChapter: 1, prevCompleted: 1, prevTotal: 7, isUnlocked: false }
+Chapter 3: 0/7 completed
+Chapter 3 unlock check: { prevChapter: 2, prevCompleted: 0, prevTotal: 7, isUnlocked: false }
+Chapter 4: 0/7 completed
+Chapter 4 unlock check: { prevChapter: 3, prevCompleted: 0, prevTotal: 7, isUnlocked: false }
+Chapter 5: 0/7 completed
+Chapter 5 unlock check: { prevChapter: 4, prevCompleted: 0, prevTotal: 7, isUnlocked: false }
+Chapter 6: 0/7 completed
+Chapter 6 unlock check: { prevChapter: 5, prevCompleted: 0, prevTotal: 7, isUnlocked: false }
+Chapter 7: 0/7 completed
+Chapter 7 unlock check: { prevChapter: 6, prevCompleted: 0, prevTotal: 7, isUnlocked: false }
+Chapter 8: 0/7 completed
+Chapter 8 unlock check: { prevChapter: 7, prevCompleted: 0, prevTotal: 7, isUnlocked: false }
+Chapter 9: 0/7 completed
+Chapter 9 unlock check: { prevChapter: 8, prevCompleted: 0, prevTotal: 7, isUnlocked: false }
+Chapter 10: 0/8 completed
+Chapter 10 unlock check: { prevChapter: 9, prevCompleted: 0, prevTotal: 7, isUnlocked: false }
+10:54:10 AM [express] GET /api/learning/AIOps/chapters 304 in 445ms :: [{"id":11,"domain":"AIOps","ch…
+10:54:20 AM [express] POST /api/rag/generate 200 in 2034ms :: {"response":"I'm sorry, but I can't pro…
+Found 0 videos for query: any video links
+10:54:20 AM [express] POST /api/youtube/search 200 in 223ms :: {"videos":[]}
+Found 0 videos for query: Programming Fundamentals
+10:54:21 AM [express] POST /api/youtube/search 200 in 222ms :: {"videos":[]}
+Found 0 videos for query: Code Best Practices
+10:54:24 AM [express] POST /api/youtube/search 200 in 222ms :: {"videos":[]}
+Found 0 videos for query: Software Development Basics
+10:54:25 AM [express] POST /api/youtube/search 200 in 222ms :: {"videos":[]}
+10:54:25 AM [express] POST /api/rag/generate 200 in 10792ms :: {"response":"To compute the Fibonacci …
+Found 0 videos for query: fibonacci in python
+10:54:26 AM [express] POST /api/youtube/search 200 in 223ms :: {"videos":[]}
+Found 0 videos for query: Python Programming Basics
+10:54:27 AM [express] POST /api/youtube/search 200 in 223ms :: {"videos":[]}
+10:54:31 AM [express] POST /api/assistant/execute 200 in 312ms :: {"output":"Hello, World!\nResult: H…

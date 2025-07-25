@@ -1,0 +1,83 @@
+
+> rest-express@1.0.0 dev
+Assessment data already existsver/index.ts
+Seeding video data...
+Cleared existing tables
+Created tables with correct structure
+Inserted 10 chapters
+Inserted 40 lessons from real playlist data
+Video data seeding completed successfully with real YouTube videos!
+Course data already exists
+1:43:41 PM [express] serving on port 5000
+Browserslist: browsers data (caniuse-lite) is 9 months old. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+1:43:47 PM [express] GET /api/user 401 in 2ms :: {"message":"Not authenticated"}
+1:43:51 PM [express] GET /api/user 401 in 1ms :: {"message":"Not authenticated"}
+1:44:16 PM [express] GET /api/user 401 in 1ms :: {"message":"Not authenticated"}
+1:44:21 PM [express] GET /api/user 401 in 1ms :: {"message":"Not authenticated"}
+1:44:54 PM [express] GET /api/user 401 in 0ms :: {"message":"Not authenticated"}
+1:45:18 PM [express] POST /api/signup 200 in 2132ms :: {"user":{"id":31,"username":"mlops12","fullNa…
+1:45:19 PM [express] GET /api/user 200 in 223ms :: {"id":31,"username":"mlops12","fullName":"MLOPS12…
+1:45:30 PM [express] POST /api/user/update-details 200 in 231ms :: {"message":"Profile updated succe…
+Fetching questions for interest: MLOps, role: DevOps, experience: beginner
+Found 10 interest MCQ + 10 role MCQ + 1 coding questions
+Final question mix: 10 MLOps + 10 DevOps = 20 total
+1:45:31 PM [express] GET /api/assessment/questions 304 in 884ms :: {"mcqQuestions":[{"id":"d18c37ce-…
+1:45:47 PM [express] POST /api/assessment/run-code-tests 200 in 738ms :: {"output":"85.00","testResu…
+Submission received - codeLanguage: python codeAnswer length: 171
+Question 623619e0-41a2-4fee-a362-e41aafcfecef: User answered "A", Correct is "C"
+Question 41cbd294-b125-4f5e-9bd1-ad35d8f5a887: User answered "A", Correct is "C"
+Question 29a99781-d447-43d4-955f-2cbefb65da21: User answered "A", Correct is "C"
+Question 4719c7fe-a6f4-4e1b-9b91-3bad81c1a1f5: User answered "A", Correct is "C"
+Question aa12bc70-9e60-4913-8a75-7e4f776e361a: User answered "A", Correct is "B"
+Question ad7738ca-55b5-4597-a813-a7d99ba9243c: User answered "A", Correct is "C"
+Question 8b6ac4d0-822a-47ab-9cbb-225b4271d10b: User answered "A", Correct is "C"
+Question 2ac21ea5-6634-4940-9d85-7587cd64c8cb: User answered "A", Correct is "C"
+Question 02d7819a-3779-42a8-a417-e8155674ded7: User answered "A", Correct is "B"
+Question c96f39ca-804c-47e2-be44-074bc072e4fb: User answered "A", Correct is "C"
+Question d18c37ce-b029-45ff-a227-6c7cd1db344b: User answered "A", Correct is "B"
+Question 02ab5d54-822d-4656-a65f-0a47ee6a18dc: User answered "A", Correct is "B"
+Question 472394f9-c051-4ca7-800b-d056f47155b8: User answered "A", Correct is "B"
+Question ebee5129-b61f-4449-8173-4911e41f2418: User answered "A", Correct is "C"
+Question 04436383-5f65-45f9-8236-b41d83f14ee6: User answered "A", Correct is "B"
+Question f660731a-9fe5-481d-a58b-82510759645b: User answered "A", Correct is "B"
+Question 77b9a901-1419-48fa-b206-f908dfd271c8: User answered "A", Correct is "B"
+Question 04a9edd3-f873-4a83-b6ad-95662c2ed0dc: User answered "A", Correct is "B"
+Question 962a50e3-6559-47e4-ac67-81413d978042: User answered "A", Correct is "A"
+Question a7006fa3-5914-4ce5-9677-2b64bdb633b1: User answered "A", Correct is "B"
+Test 1: Using language "python" for code execution
+Submission Test 1: Expected="85.00", Got="85.00", Passed=true
+Test 2: Using language "python" for code execution
+Submission Test 2: Expected="70.00", Got="70.00", Passed=true
+Test 3: Using language "python" for code execution
+Submission Test 3: Expected="82.00", Got="", Passed=false
+Code evaluation: 2/3 tests passed, score: 67%
+Test case results: [
+  {
+    testCase: 1,
+    input: 'calculateAccuracy(85, 100)',
+    expected: '85.00',
+    actual: '85.00',
+    passed: true
+  },
+  {
+    testCase: 2,
+    input: 'calculateAccuracy(7, 10)',
+    expected: '70.00',
+    actual: '70.00',
+    passed: true
+  },
+  {
+    testCase: 3,
+    input: 'calculateAccuracy(123, 150)',
+    expected: '82.00',
+    actual: 'No output',
+    passed: false
+  }
+]
+1:45:53 PM [express] POST /api/assessment/submit 200 in 1960ms :: {"message":"Assessment submitted s…
+1:46:02 PM [express] GET /api/assessment/results 200 in 8680ms :: {"mcqScore":5,"codingScore":67,"to…
+1:46:13 PM [express] GET /api/dashboard 200 in 454ms :: {"user":{"id":31,"username":"mlops12","fullN…
+1:46:14 PM [express] GET /api/learning/MLOps/chapters 304 in 452ms :: [{"id":1,"domain":"MLOps","cha…
+1:46:17 PM [express] GET /api/learning/MLOPS/chapters/1/lessons 200 in 451ms :: []

@@ -1,0 +1,19 @@
+Test Results (0/3 passed)
+Test 1: FAILED
+Input: checkSystemHealth(65)
+Expected: healthy
+Got: Error: /piston/jobs/b65c7d5a-f606-4c78-8def-6e3c516a68d4/file0.code:2 function checkSystemHealth(cpuUsage) {\n // Your code here\n} ^ SyntaxError: Invalid or unexpected token at internalCompileFunction (node:internal/vm:73:18) at wrapSafe (node:internal/modules/cjs/loader:1176:20) at Module._compile (node:internal/modules/cjs/loader:1218:27) at Module._extensions..js (node:internal/modules/cjs/loader:1308:10) at Module.load (node:internal/modules/cjs/loader:1117:32) at Module._load (node:internal/modules/cjs/loader:958:12) at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12) at node:internal/main/run_main_module:23:47 Node.js v18.15.0
+Test 2: FAILED
+Input: checkSystemHealth(85)
+Expected: critical
+Got: No output
+Test 3: FAILED
+Input: checkSystemHealth(79)
+Expected: healthy
+Got: Error: /piston/jobs/2a636bde-1da9-437e-bc21-83eabbad0952/file0.code:2 function checkSystemHealth(cpuUsage) {\n // Your code here\n} ^ SyntaxError: Invalid or unexpected token at internalCompileFunction (node:internal/vm:73:18) at wrapSafe (node:internal/modules/cjs/loader:1176:20) at Module._compile (node:internal/modules/cjs/loader:1218:27) at Module._extensions..js (node:internal/modules/cjs/loader:1308:10) at Module.load (node:internal/modules/cjs/loader:1117:32) at Module._load (node:internal/modules/cjs/loader:958:12) at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12) at node:internal/main/run_main_module:23:47 Node.js v18.15.0
+Code Editor
+
+JavaScript
+1
+Console:
+/piston/jobs/b65c7d5a-f606-4c78-8def-6e3c516a68d4/file0.code:2 function checkSystemHealth(cpuUsage) {\n // Your code here\n} ^ SyntaxError: Invalid or unexpected token at internalCompileFunction (node:internal/vm:73:18) at wrapSafe (node:internal/modules/cjs/loader:1176:20) at Module._compile (node:internal/modules/cjs/loader:1218:27) at Module._extensions..js (node:internal/modules/cjs/loader:1308:10) at Module.load (node:internal/modules/cjs/loader:1117:32) at Module._load (node:internal/modules/cjs/loader:958:12) at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:81:12) at node:internal/main/run_main_module:23:47 Node.js v18.15.0
